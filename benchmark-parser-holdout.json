@@ -1,0 +1,123 @@
+[
+  {
+    "name": "literal_characters",
+    "draft_id": "eaa0d187097c443583c5484738002400",
+    "seconds": 27.421000000002095,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "WI-603",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "Honda Accord",
+          "jurisdiction": "Wisconsin",
+          "color": "silver",
+          "vehicle_type": null,
+          "make": "Honda",
+          "model": "Accord",
+          "year": null,
+          "excerpt": "a silver Honda Accord with Wisconsin plate B80O12."
+        }
+      ]
+    },
+    "issues": [
+      "Source contains plate-like identifiers not covered by this draft. Check for missing vehicles or conflicting text.",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "corrected_plate",
+    "draft_id": "cf6c22ea4fb742f681b68b84ade96c4f",
+    "seconds": 22.937999999994645,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "NV-882",
+      "status": "updated",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "Kia Soul",
+          "jurisdiction": null,
+          "color": "white",
+          "vehicle_type": null,
+          "make": "Kia",
+          "model": "Soul",
+          "year": null,
+          "excerpt": "a white Kia Soul with Nevada plate HJK223."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported jurisdiction",
+      "Source contains plate-like identifiers not covered by this draft. Check for missing vehicles or conflicting text.",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "conflicting_color",
+    "draft_id": "59d47ce84f324a7393aa1b1f7b5d4ccd",
+    "seconds": 23.01500000001397,
+    "status": "ready",
+    "exact_fields": true,
+    "result": {
+      "reference": "AMBER ALERT CO-214",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "VTR604",
+          "jurisdiction": "Colorado",
+          "color": null,
+          "vehicle_type": null,
+          "make": "Subaru",
+          "model": "Outback",
+          "year": null,
+          "excerpt": "A Subaru Outback has Colorado plate VTR604."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported color",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "two_vehicle_associations",
+    "draft_id": "fe4709bdc18845ff9fb7b306d0cb701a",
+    "seconds": 23.0,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "FL-729",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "JPL831",
+          "jurisdiction": "Florida",
+          "color": "yellow",
+          "vehicle_type": null,
+          "make": "Chevrolet",
+          "model": "Camaro",
+          "year": null,
+          "excerpt": "a yellow Chevrolet Camaro with Florida plate JPL831."
+        }
+      ]
+    },
+    "issues": [
+      "Source contains plate-like identifiers not covered by this draft. Check for missing vehicles or conflicting text.",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  }
+]

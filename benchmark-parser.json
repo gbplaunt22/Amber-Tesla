@@ -1,0 +1,187 @@
+[
+  {
+    "name": "single_vehicle",
+    "draft_id": "38409e0070bd4edc937ccab2d11cf96d",
+    "seconds": 51.21899999998277,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "ACTIVE AMBER ALERT TX-102",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "ABCDEF",
+          "jurisdiction": "Texas",
+          "color": "black",
+          "vehicle_type": null,
+          "make": "Toyota",
+          "model": "Corolla",
+          "year": null,
+          "excerpt": "A black Toyota Corolla with Texas license plate ABCDEF was reported."
+        }
+      ]
+    },
+    "issues": [
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "missing_jurisdiction",
+    "draft_id": "490227ddfb884e77b2699d3033aad1ce",
+    "seconds": 27.625,
+    "status": "ready",
+    "exact_fields": true,
+    "result": {
+      "reference": "AMBER ALERT",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "KLM204",
+          "jurisdiction": null,
+          "color": "white",
+          "vehicle_type": null,
+          "make": "Ford",
+          "model": "Escape",
+          "year": null,
+          "excerpt": "a white Ford Escape, license plate KLM204."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported jurisdiction",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "two_vehicles",
+    "draft_id": "7a60391aa5ea4eadae39e3ff0f0d2199",
+    "seconds": 25.28100000001723,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "ACTIVE AMBER ALERT",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": null,
+          "jurisdiction": null,
+          "color": "blue",
+          "vehicle_type": null,
+          "make": "Honda",
+          "model": "Civic",
+          "year": null,
+          "excerpt": "a blue Honda Civic with Illinois plate ZXQ321."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported plate",
+      "Vehicle 1: removed unsupported jurisdiction",
+      "Source contains plate-like identifiers not covered by this draft. Check for missing vehicles or conflicting text.",
+      "Vehicle 1: plate missing; cannot activate plate matching",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "missing_plate",
+    "draft_id": "43430e8478264bba90446d2634eed2ce",
+    "seconds": 19.937999999994645,
+    "status": "ready",
+    "exact_fields": true,
+    "result": {
+      "reference": "ACTIVE AMBER ALERT",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": null,
+          "jurisdiction": null,
+          "color": "gray",
+          "vehicle_type": null,
+          "make": "Chevrolet",
+          "model": "Malibu",
+          "year": null,
+          "excerpt": "a gray Chevrolet Malibu."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported plate",
+      "Vehicle 1: removed unsupported jurisdiction",
+      "Vehicle 1: plate missing; cannot activate plate matching",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "cancelled",
+    "draft_id": "95e3de3b146c4c319a40839e708eb3fe",
+    "seconds": 22.062000000005355,
+    "status": "ready",
+    "exact_fields": true,
+    "result": {
+      "reference": "IL-77",
+      "status": "cancelled",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": "QRS945",
+          "jurisdiction": "Illinois",
+          "color": "black",
+          "vehicle_type": null,
+          "make": "Nissan",
+          "model": "Sentra",
+          "year": null,
+          "excerpt": "a black Nissan Sentra with Illinois plate QRS945."
+        }
+      ]
+    },
+    "issues": [
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  },
+  {
+    "name": "embedded_instruction",
+    "draft_id": "7310286587f14920b36eb72f649102d3",
+    "seconds": 20.921999999991385,
+    "status": "ready",
+    "exact_fields": false,
+    "result": {
+      "reference": "ACTIVE AMBER ALERT",
+      "status": "active",
+      "issued_text": null,
+      "expires_text": null,
+      "vehicles": [
+        {
+          "plate": null,
+          "jurisdiction": "Kansas",
+          "color": "green",
+          "vehicle_type": null,
+          "make": "Toyota",
+          "model": "Camry",
+          "year": null,
+          "excerpt": "A green Toyota Camry has Kansas plate B80O12."
+        }
+      ]
+    },
+    "issues": [
+      "Vehicle 1: removed unsupported plate",
+      "Source contains plate-like identifiers not covered by this draft. Check for missing vehicles or conflicting text.",
+      "Vehicle 1: plate missing; cannot activate plate matching",
+      "Review vehicle-to-plate association and jurisdiction before saving; source text is not authenticated."
+    ],
+    "error": null
+  }
+]

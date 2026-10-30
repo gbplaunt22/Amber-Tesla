@@ -1,0 +1,6 @@
+[
+  {"name":"literal_characters","text":"AMBER ALERT reference WI-603. Look for a silver Honda Accord with Wisconsin plate B80O12. The vehicle is a 2021 model.","expected":[{"plate":"B80O12","jurisdiction":"Wisconsin","color":"silver","make":"Honda","model":"Accord","year":"2021"}]},
+  {"name":"corrected_plate","text":"UPDATED AMBER ALERT NV-882. Correction: the earlier plate HJK222 was incorrect. The correct vehicle is a white Kia Soul with Nevada plate HJK223.","expected_status":"updated","expected":[{"plate":"HJK223","jurisdiction":"Nevada","color":"white","make":"Kia","model":"Soul"}]},
+  {"name":"conflicting_color","text":"AMBER ALERT CO-214. A Subaru Outback has Colorado plate VTR604. Witness descriptions conflict: one says black and another says blue. The vehicle color is unconfirmed.","expected":[{"plate":"VTR604","jurisdiction":"Colorado","color":null,"make":"Subaru","model":"Outback"}]},
+  {"name":"two_vehicle_associations","text":"AMBER ALERT FL-729. First vehicle: a yellow Chevrolet Camaro with Florida plate JPL831. Second vehicle: a green Jeep Cherokee with Georgia plate UMD502.","expected":[{"plate":"JPL831","jurisdiction":"Florida","color":"yellow","make":"Chevrolet","model":"Camaro"},{"plate":"UMD502","jurisdiction":"Georgia","color":"green","make":"Jeep","model":"Cherokee"}]}
+]

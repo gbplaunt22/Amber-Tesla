@@ -1,0 +1,54 @@
+# Python and local development
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+node_modules/
+
+# Private installation configuration and credentials
+.env
+.env.*
+!.env.example
+CONNECT.md
+connection.json
+network.json
+auth.json
+*credentials*.json
+pi_known_hosts
+*.pem
+*.key
+
+# Runtime data, recordings, evidence, and model assets
+data/
+spool/
+crops/
+evidence/
+models/
+*.sqlite*
+*.db
+*.db-*
+*.log
+*.mp4
+*.mov
+*.avi
+*.jpg
+*.jpeg
+*.gguf
+*.onnx
+*.part
+*.zip
+*.tar
+*.tar.gz
+
+# Local scratch space and downloads
+work/
+downloads/
+wheels/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,168 @@
+[
+  {
+    "clip": "2026-10-29_22-59-25-front.mp4",
+    "clip_duration_s": 60.00429999999999,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.38890079399971,
+      "max_s": 0.463039629999912
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.17511745200014653,
+      "max_s": 0.1819949569999153
+    },
+    "vehicle_crop_alpr": {
+      "n": 0
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.26142614166686445,
+      "max_s": 0.2678725559999293
+    },
+    "vehicle_detections": 0,
+    "plate_reads_count": 0,
+    "rss_mib": 247.453125,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "front"
+  },
+  {
+    "clip": "2026-10-29_22-59-25-back.mp4",
+    "clip_duration_s": 59.8785,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.12626078566700016,
+      "max_s": 0.1587062580001657
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.16425591266640063,
+      "max_s": 0.16538506999950187
+    },
+    "vehicle_crop_alpr": {
+      "n": 0
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.2775730393335228,
+      "max_s": 0.30218409999997675
+    },
+    "vehicle_detections": 0,
+    "plate_reads_count": 0,
+    "rss_mib": 239.21484375,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "back"
+  },
+  {
+    "clip": "2026-10-29_22-59-25-left_repeater.mp4",
+    "clip_duration_s": 60.0033,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.11910512533328681,
+      "max_s": 0.12145116000010603
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.15842290900066777,
+      "max_s": 0.16063440900052228
+    },
+    "vehicle_crop_alpr": {
+      "n": 0
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.32323948433319555,
+      "max_s": 0.336582921999252
+    },
+    "vehicle_detections": 0,
+    "plate_reads_count": 0,
+    "rss_mib": 248.21484375,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "left_repeater"
+  },
+  {
+    "clip": "2026-10-29_22-59-25-right_repeater.mp4",
+    "clip_duration_s": 60.010999999999996,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.12362380433357127,
+      "max_s": 0.14557040100044105
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.15873565533335446,
+      "max_s": 0.15945979800017085
+    },
+    "vehicle_crop_alpr": {
+      "n": 3,
+      "mean_s": 0.2634625943334565,
+      "max_s": 0.27247790900037216
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.2669735533330216,
+      "max_s": 0.2733171209993088
+    },
+    "vehicle_detections": 3,
+    "plate_reads_count": 0,
+    "rss_mib": 245.953125,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "right_repeater"
+  },
+  {
+    "clip": "2026-10-29_22-59-25-left_pillar.mp4",
+    "clip_duration_s": 59.9476,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.10939549833316657,
+      "max_s": 0.11334912399979657
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.1611228783334203,
+      "max_s": 0.16450520299986238
+    },
+    "vehicle_crop_alpr": {
+      "n": 0
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.2558306700002504,
+      "max_s": 0.2583288530004211
+    },
+    "vehicle_detections": 0,
+    "plate_reads_count": 0,
+    "rss_mib": 250.046875,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "left_pillar"
+  },
+  {
+    "clip": "2026-10-29_22-59-25-right_pillar.mp4",
+    "clip_duration_s": 59.947199999999995,
+    "decode": {
+      "n": 3,
+      "mean_s": 0.10389368899996043,
+      "max_s": 0.11533321499973681
+    },
+    "vehicle_detector": {
+      "n": 3,
+      "mean_s": 0.1610472853332491,
+      "max_s": 0.16215130099953967
+    },
+    "vehicle_crop_alpr": {
+      "n": 3,
+      "mean_s": 0.2580146876668247,
+      "max_s": 0.2620192530002896
+    },
+    "full_frame_alpr": {
+      "n": 3,
+      "mean_s": 0.25523791400003876,
+      "max_s": 0.25832740900023055
+    },
+    "vehicle_detections": 3,
+    "plate_reads_count": 0,
+    "rss_mib": 250.234375,
+    "note": "Timing sample only. Plates are not logged. This does not measure recall or live end-to-end latency.",
+    "camera": "right_pillar"
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "elapsed": 340.2738299369812,
+  "clips": [
+    {
+      "camera": "front",
+      "state": "complete",
+      "frame_cursor": 60.0,
+      "duration": 60.0266
+    },
+    {
+      "camera": "back",
+      "state": "complete",
+      "frame_cursor": 62.0,
+      "duration": 60.3872
+    },
+    {
+      "camera": "left_repeater",
+      "state": "complete",
+      "frame_cursor": 64.0,
+      "duration": 60.0132
+    },
+    {
+      "camera": "right_repeater",
+      "state": "complete",
+      "frame_cursor": 64.0,
+      "duration": 60.0362
+    },
+    {
+      "camera": "left_pillar",
+      "state": "complete",
+      "frame_cursor": 64.0,
+      "duration": 59.9725
+    },
+    {
+      "camera": "right_pillar",
+      "state": "complete",
+      "frame_cursor": 64.0,
+      "duration": 59.9438
+    }
+  ],
+  "sightings": [
+    {
+      "state": "complete",
+      "n": 18,
+      "frames": 54
+    }
+  ],
+  "events": 0,
+  "health": [
+    {
+      "name": "video",
+      "updated": 1793383736.8389668,
+      "state": "ready",
+      "detail": "Waiting for new completed recordings"
+    }
+  ],
+  "metrics": {
+    "sampling": {
+      "scale": 4,
+      "front_back_fps": 0.25,
+      "side_fps": 0.0625,
+      "reason": "backlog pressure"
+    },
+    "last_discovery_frame": {
+      "decode_seconds": 0.1570305110008121,
+      "detector_seconds": 0.2067747799992503,
+      "vehicles": 0,
+      "camera": "right_repeater"
+    },
+    "last_ocr_job": {
+      "lane": "likely",
+      "seconds": 1.0024503149998054
+    }
+  }
+}
