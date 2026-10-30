@@ -1,6 +1,16 @@
 # Deployment verification — 30 October 2026
 
-Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, Debian 12 AArch64. The system is ready for a supervised in-car trial; the full driving acceptance criteria are **not yet established**.
+Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, Debian 12 AArch64. The first supervised in-car trial has begun and produced a positive operator-prioritized diagnostic; the full driving acceptance criteria are **not yet established**.
+
+## Subsequent live result and front-camera configuration
+
+After the backlog checkpoint below, an operator-prioritized diagnostic processed actual Tesla front-camera recordings locally on the Pi. The third selected clip produced a stored **strong possible-match event** from two exact reads in distinct decoded frames, with minimum OCR confidences 0.996132493019104 and 0.9982187151908875. The diagnostic selected the footage manually and sampled at 1 FPS after the startup backlog; this result does not demonstrate normal automatic queue latency or the five-minute 95th-percentile requirement. The phone's audible notification remains unverified. Private target plates, footage, and runtime event records are not published.
+
+At the user's request, the latest source defaults to **front camera only** through `AMBER_CAMERAS=front`. Other cameras require an explicit comma-separated configuration. The admission filter runs before probing or copying, while the car and TeslaUSB continue recording normally. Existing admitted jobs are durable and require separate cleanup when changing camera scope.
+
+The latest dashboard source reports the age of the oldest actual pending footage, including sightings after clip discovery. Empty-state text distinguishes an active alert from having no active search, and operator-prioritized diagnostic results are labeled. Sound handling also allows a weak candidate's later strong upgrade and a user-unlocked audio context. **Seven API tests passed on the Pi in 8.31 seconds**; JavaScript syntax and focused state-transition checks passed locally. These software checks do not establish audible playback on a physical phone.
+
+**Final deployment/test limitation:** the SSH connection was lost before deploying the dashboard changes and front-only configuration. They are committed source changes, not verified running behavior on the car's Pi. The new camera-filter regression tests were added but not run on Linux before that handoff; source syntax and publication checks passed. The earlier ingestion-backlog correction was deployed and its 10 focused Pi tests are reported below. Do not combine these separate checks into a claim that the final complete build passed all tests or was deployed.
 
 ## Live trial update, 30 October 2026 at 15:42 Central
 

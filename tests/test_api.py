@@ -54,3 +54,19 @@ def test_old_event_does_not_notify_after_edit(client):
     assert client.get("/events").json()[0]["notify"]
     client.put("/alerts/"+key,json=body())
     assert not client.get("/events").json()[0]["notify"]
+
+
+def test_health_reports_capture_age_before_queue_creation_age(client):
+    now=time.time()
+    empty=client.get("/health").json()
+    assert empty["oldest_clip_capture"] is None and empty["oldest_footage_capture"] is None
+    db.execute("INSERT INTO clips(id,source_name,camera,capture,path,size,duration,width,height,admitted) VALUES ('old','test.mp4','front',?,'unused',1,60,160,120,?)",(now-540,now-5))
+    db.execute("INSERT INTO sightings(id,clip_id,camera,capture,created,lane,state,frames,alert_versions) VALUES ('s','old','front',?,?,'other','collecting','[]','{}')",(now-600,now-2))
+    health=client.get("/health").json()
+    assert health["clips_pending"]==1
+    assert health["oldest_clip_capture"]==now-540
+    assert health["oldest_footage_capture"]==now-600
+    assert health["queue"][0]["oldest"]==now-2
+    db.execute("UPDATE clips SET state='complete'")
+    db.execute("UPDATE sightings SET state='complete'")
+    assert client.get("/health").json()["oldest_footage_capture"] is None

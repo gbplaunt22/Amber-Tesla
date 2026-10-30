@@ -60,3 +60,28 @@ def test_copy_completion_rechecks_current_time(tmp_path, monkeypatch):
     ingest.scan()
     assert not db.query("SELECT * FROM clips")
     assert not list(C.SPOOL.glob("*.part"))
+
+
+def test_front_only_skips_other_cameras_before_probe(tmp_path, monkeypatch):
+    setup_clips(tmp_path, monkeypatch, [10])
+    monkeypatch.setattr(C, "CAMERAS", frozenset(("front",)))
+    front=next(C.SOURCE.glob("*-front.mp4"))
+    for camera in C.SUPPORTED_CAMERAS-{"front"}:
+        front.with_name(front.name.replace("-front.mp4", "-"+camera+".mp4")).write_bytes(b"other camera")
+    original=ingest.probe_metadata
+    def probe(path):
+        if path.suffix==".mp4":
+            assert path.name.endswith("-front.mp4")
+        return original(path)
+    monkeypatch.setattr(ingest, "probe_metadata", probe)
+    ingest.scan()
+    assert [row["camera"] for row in db.query("SELECT * FROM clips")]==["front"]
+
+
+def test_other_camera_requires_explicit_opt_in(tmp_path, monkeypatch):
+    setup_clips(tmp_path, monkeypatch, [10])
+    monkeypatch.setattr(C, "CAMERAS", frozenset(("back",)))
+    front=next(C.SOURCE.glob("*-front.mp4"))
+    front.with_name(front.name.replace("-front.mp4", "-back.mp4")).write_bytes(b"back camera")
+    ingest.scan()
+    assert [row["camera"] for row in db.query("SELECT * FROM clips")]==["back"]

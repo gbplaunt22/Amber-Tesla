@@ -53,6 +53,7 @@ def test_ingestion_skips_incomplete_and_deduplicates_snapshots(tmp_path,monkeypa
 
 
 def test_embedded_utc_handles_different_car_timezone(tmp_path,monkeypatch):
+    monkeypatch.setattr(C,"CAMERAS",frozenset(("back",)))
     from amber import ingest
     source=tmp_path/"source";source.mkdir()
     snapshots=tmp_path/"snapshots";snapshots.mkdir()

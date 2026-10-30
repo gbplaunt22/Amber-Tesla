@@ -9,6 +9,10 @@ SPOOL = DATA / "spool"
 CROPS = DATA / "crops"
 EVIDENCE = DATA / "evidence"
 SOURCE = Path(os.getenv("AMBER_SOURCE", "/mutable/TeslaCam"))
+SUPPORTED_CAMERAS = frozenset(("front", "back", "left_repeater", "right_repeater", "left_pillar", "right_pillar"))
+CAMERAS = frozenset(camera.strip() for camera in os.getenv("AMBER_CAMERAS", "front").split(",") if camera.strip())
+if not CAMERAS or not CAMERAS <= SUPPORTED_CAMERAS:
+    raise ValueError("AMBER_CAMERAS must be a nonempty comma-separated list of supported Tesla cameras")
 SNAPSHOTS = Path(os.getenv("AMBER_SNAPSHOTS", "/backingfiles/snapshots"))
 AUTH_FILE = Path(os.getenv("AMBER_AUTH_FILE", "/mutable/amber/auth.json"))
 LLAMA = Path(os.getenv("AMBER_LLAMA", str(ROOT / "llama/bin/llama-server")))

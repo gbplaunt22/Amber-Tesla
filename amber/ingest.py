@@ -57,6 +57,7 @@ def scan():
     for path in C.SOURCE.rglob("*.mp4"):
         match = NAME.match(path.name)
         if not match: continue
+        if match[2] not in C.CAMERAS: continue
         capture = dt.datetime.strptime(match[1],"%Y-%m-%d_%H-%M-%S").timestamp()
         try:
             size = path.stat().st_size

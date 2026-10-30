@@ -277,10 +277,13 @@ def health():
     except OSError: pass
     try: attached = next(Path("/sys/class/udc").glob("*/state")).read_text().strip()
     except (OSError,StopIteration): pass
-    q = db.query("SELECT lane,COUNT(*) AS count,MIN(created) AS oldest FROM sightings WHERE state IN ('collecting','pending','working') GROUP BY lane")
+    q = db.query("SELECT lane,COUNT(*) AS count,MIN(created) AS oldest,MIN(capture) AS oldest_capture FROM sightings WHERE state IN ('collecting','pending','working') GROUP BY lane")
+    clips = db.query("SELECT COUNT(*) AS n,MIN(capture) AS oldest_capture FROM clips WHERE state IN ('pending','working')")[0]
+    captures = [row["oldest_capture"] for row in [clips]+q if row["oldest_capture"] is not None]
     return {"time":time.time(),"temperature_c":temp,"usb_state":attached,
             "free_bytes":shutil.disk_usage(C.ROOT).free,"services":db.query("SELECT * FROM service_health"),
-            "queue":q,"clips_pending":db.query("SELECT COUNT(*) AS n FROM clips WHERE state IN ('pending','working')")[0]["n"],
+            "queue":q,"clips_pending":clips["n"],"oldest_clip_capture":clips["oldest_capture"],
+            "oldest_footage_capture":min(captures) if captures else None,
             "metrics":{r["key"]:json.loads(r["value"]) for r in db.query("SELECT * FROM metrics")},
             "models":{p.name:p.exists() for p in (C.GEMMA,C.MODELS/"yolox_nano.onnx",C.MODELS/"plate.onnx",C.MODELS/"ocr.onnx")}}
 
