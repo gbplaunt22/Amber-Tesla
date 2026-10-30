@@ -36,6 +36,8 @@ TeslaUSB's existing snapshot loop is configured with `SNAPSHOT_INTERVAL=60`. Its
 
 MP4 embedded UTC creation time is authoritative. The newest readable clip calibrates filename prefiltering so a car/Pi timezone difference does not silently discard all new recordings. Incomplete files are retried. Clip name and size deduplicate repeated snapshot links and SavedClips copies.
 
+New admission excludes clips ending before the earliest active alert was created. Each scan attempts at most six new clips, newest eligible footage first, so activating an alert does not backfill unrelated pre-alert recordings. Existing admitted work remains durable across a restart. This corrects a startup-backlog issue observed during the first live trial; see `VERIFICATION.md` for the measured result and remaining acceptance checks.
+
 Discovery starts at 1 FPS front/back and 0.25 FPS on each side view. If the oldest selected clip is over 120 seconds old, rates halve; beyond 180 seconds they quarter. This is explicit, visible load shedding: **brief vehicles can be missed**. The 2–5 minute target is not a guarantee, and a sustained in-car latency/recall trial is still required.
 
 ### Scheduling and matching

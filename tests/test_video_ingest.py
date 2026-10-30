@@ -8,7 +8,7 @@ from amber.ingest import scan
 
 def active():
     now=time.time()
-    db.execute("INSERT INTO alerts(id,plate,plate_raw,created,expires,expiry_default) VALUES ('a','TEST01','TEST01',?,?,1)",(now,now+100))
+    db.execute("INSERT INTO alerts(id,plate,plate_raw,created,expires,expiry_default) VALUES ('a','TEST01','TEST01',?,?,1)",(now-10,now+100))
 
 def sighting(key,lane,created,state='pending'):
     db.execute("INSERT INTO sightings(id,clip_id,camera,capture,created,lane,state,frames,alert_versions) VALUES (?,'clip','front',?,?,?,?,'[]','{}')",(key,created,created,lane,state))

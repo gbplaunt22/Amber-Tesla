@@ -44,9 +44,11 @@ def snapshot_lock():
 def scan():
     global _clock_sample
     now = time.time()
-    if not db.active():
+    alerts = db.active()
+    if not alerts:
         db.health("ingest","idle","No active plate alerts; recordings are not copied")
         return
+    alert_start = min(alert["created"] for alert in alerts)
     if shutil.disk_usage(C.ROOT).free < C.FREE_FLOOR:
         db.health("ingest","paused","Less than 20 GiB free; preserving Tesla recording capacity")
         return
@@ -77,13 +79,18 @@ def scan():
         except (OSError,ValueError,subprocess.SubprocessError,KeyError,IndexError):continue
     for key,path,capture,camera,size in discovered:
         capture+=offset
-        if now-capture>C.SPOOL_AGE or capture-now>120:continue
+        if now-capture>C.SPOOL_AGE or capture-now>120 or capture+180<alert_start:continue
         candidates[key]=(path,capture,camera,size)
     known = {r["id"] for r in db.query("SELECT id FROM clips")}
-    # Oldest first within the recent window; no rescan of historical SavedClips.
-    for key,(path,capture,camera,size) in sorted(candidates.items(),key=lambda x:x[1][1]):
+    # Bound each pass and favor fresh footage instead of backfilling the buffer.
+    attempts = 0
+    for key,(path,capture,camera,size) in sorted(candidates.items(),key=lambda x:x[1][1],reverse=True):
         if key in known: continue
+        if attempts >= 6: break
+        current = time.time()
+        if current-capture>C.SPOOL_AGE or capture-current>120:continue
         if shutil.disk_usage(C.ROOT).free-size < C.FREE_FLOOR: break
+        attempts += 1
         destination = C.SPOOL / (key+".mp4")
         partial = destination.with_suffix(".part")
         try:
@@ -92,6 +99,12 @@ def scan():
                 resolved = path.resolve(strict=True)
                 if not str(resolved).startswith(("/tmp/snapshots/", str(C.SNAPSHOTS.resolve())+"/")):
                     raise ValueError("Recording is not in a TeslaUSB snapshot")
+                # Reject clips ending before activation before paying the copy cost.
+                duration,width,height,embedded_capture = probe_metadata(resolved)
+                capture=embedded_capture if embedded_capture is not None else capture
+                current=time.time()
+                if current-capture>C.SPOOL_AGE or capture-current>120 or capture+duration<alert_start:
+                    continue
                 # One clip per lock. No decoding or inference while held.
                 with open(resolved,"rb") as src, open(partial,"wb") as dest:
                     shutil.copyfileobj(src,dest,1024*1024)
@@ -99,7 +112,8 @@ def scan():
             if partial.stat().st_size != size: raise ValueError("Clip changed during discovery")
             duration,width,height,embedded_capture = probe_metadata(partial)
             capture=embedded_capture if embedded_capture is not None else capture
-            if now-capture>C.SPOOL_AGE or capture-now>120:
+            current=time.time()
+            if current-capture>C.SPOOL_AGE or capture-current>120 or capture+duration<alert_start:
                 partial.unlink(missing_ok=True)
                 continue
             os.replace(partial,destination)

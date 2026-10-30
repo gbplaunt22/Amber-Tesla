@@ -2,6 +2,18 @@
 
 Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, Debian 12 AArch64. The system is ready for a supervised in-car trial; the full driving acceptance criteria are **not yet established**.
 
+## Live trial update, 30 October 2026 at 15:42 Central
+
+The Pi was connected to the car and newly recorded, completed snapshots from all six cameras were confirmed. A reviewed controlled-test alert was activated at 15:35:52 Central. At the 15:42 inspection, the approximately 15:38 encounter had not yet been processed: admission had backfilled recordings from before alert activation, delaying current footage. No positive plate match or sound notification was verified at that checkpoint.
+
+This exposed a startup-backlog defect, rather than establishing recognition failure on the controlled encounter. The correction bounds new admission to clips overlapping an active alert and selects the newest eligible clips first. Older already-admitted work requires a separate operational decision; restarting the process alone does not erase the durable queue. The live trial still does not establish uninterrupted recording over a sustained route, positive-match recall, or the five-minute 95th-percentile target.
+
+The correction passed **10 focused tests in 11.98 seconds on the actual Pi**, using isolated source: `tests/test_ingest_window.py` and `tests/test_video_ingest.py`. These cover pre-activation rejection before copying, overlapping clips, newest-first bounded admission, expiry during a scan, existing ingestion behavior, and video scheduling behavior. This is targeted regression validation, not a rerun of every deployment test or a positive in-car match demonstration.
+
+A separate local Windows CPU diagnostic used FastALPR's public `test_image.png` and the same application inference functions with pinned model files. Vehicle-crop OCR read `5AU5341`, matching the upstream test, with minimum OCR confidence 0.999570. Confidence was a Python list, compatible with the application's normalization. YOLOX incorrectly labeled the main passenger car as a truck, confirming that appearance must remain a soft priority. This was one public still image, not Tesla footage or a Pi benchmark, and did not exercise two-frame confirmation or notification. No private test plate, recording, credentials, or runtime database is included in this repository.
+
+The remaining sections document the earlier deployment baseline and its measurements; they should not be read as a completed in-car acceptance report.
+
 ## Implemented and checked
 
 - Local YOLOX-Nano and FastALPR with explicit, SHA-256-verified model files; no runtime downloads.
@@ -15,7 +27,7 @@ Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, D
 
 ## Automated and browser checks
 
-**31 automated tests passed on the final build on the Pi in 47.30 seconds.** The suite covers matching confidence/distinct frames, near-to-exact upgrades, edits/cancellations/expiry, authenticated activation, draft idempotence, weighted scheduling, capacity eviction, job recovery, incomplete clips, deduplication, timestamp offsets, retention and orphan cleanup, parser grounding, token limits, and parser failure preserving active alerts/manual entry. One dependency deprecation warning concerns Starlette's test client using HTTPX; it did not fail a test.
+**31 automated tests passed on the earlier deployment build on the Pi in 47.30 seconds.** The suite covers matching confidence/distinct frames, near-to-exact upgrades, edits/cancellations/expiry, authenticated activation, draft idempotence, weighted scheduling, capacity eviction, job recovery, incomplete clips, deduplication, timestamp offsets, retention and orphan cleanup, parser grounding, token limits, and parser failure preserving active alerts/manual entry. One dependency deprecation warning concerns Starlette's test client using HTTPX; it did not fail a test.
 
 Headless Edge exercised the actual Pi dashboard through an SSH loopback forward, both before and after reboot. Login, manual create/edit/cancel, adding/removing vehicle editors, and a 390-pixel mobile layout passed with no JavaScript errors or horizontal overflow. The AP's own HTTP endpoint returned 200, and `amber0` returned with address 192.168.66.1 after reboot. A physical phone's association, DHCP lease, and audible sound still need checking.
 
