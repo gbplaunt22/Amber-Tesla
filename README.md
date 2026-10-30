@@ -6,7 +6,7 @@ The dashboard is named **Amber Local**. This project's repository is [gbplaunt22
 
 ## Using the deployed Pi
 
-The latest repository source defaults to front-camera processing and includes dashboard health/sound fixes. Those final changes were **not deployed before the last handoff because the SSH connection was lost**. The earlier ingestion-backlog fix was deployed. See `VERIFICATION.md` for the tested/deployed split before assuming the running Pi matches this source revision.
+The latest front-camera configuration and dashboard health/sound fixes were deployed at 15:59 Central after the SSH connection recovered. Ingestion, video, and web services were active, and 19 focused tests passed on the Pi. See `VERIFICATION.md` for the positive controlled result and the remaining sound/latency checks.
 
 1. Join **AMBER-Local** on your phone. For the existing installation, generated Wi-Fi and dashboard credentials were delivered separately in a private `CONNECT.md`. Credentials and this private guide are excluded from Git; installation also stores recovery credentials under `/mutable/amber` on the Pi.
 2. Open **http://192.168.66.1:8088/** and sign in. The access point intentionally provides no internet gateway or DNS service; your phone may ask to stay connected to a network without internet.
@@ -40,7 +40,7 @@ MP4 embedded UTC creation time is authoritative. The newest readable clip calibr
 
 New admission excludes clips ending before the earliest active alert was created. Each scan attempts at most six new clips, newest eligible footage first, so activating an alert does not backfill unrelated pre-alert recordings. Existing admitted work remains durable across a restart. This corrects a startup-backlog issue observed during the first live trial; see `VERIFICATION.md` for the measured result and remaining acceptance checks.
 
-The current source defaults to **front camera only**, as requested after the first live trial; this final change still requires deployment to the Pi. `AMBER_CAMERAS` accepts a comma-separated subset of `front,back,left_repeater,right_repeater,left_pillar,right_pillar`; its default is `front`, and empty or unsupported values fail startup. Unselected cameras are skipped before metadata probing or copying. This changes application processing only: TeslaUSB and the car continue recording their cameras normally. Changing the filter does not automatically remove already-admitted jobs.
+Processing defaults to **front camera only**, as requested after the first live trial and deployed to the Pi. `AMBER_CAMERAS` accepts a comma-separated subset of `front,back,left_repeater,right_repeater,left_pillar,right_pillar`; its default is `front`, and empty or unsupported values fail startup. Unselected cameras are skipped before metadata probing or copying. This changes application processing only: TeslaUSB and the car continue recording their cameras normally. Changing the filter does not automatically remove already-admitted jobs.
 
 Discovery starts at 1 FPS for front/back when selected, or 0.25 FPS for selected side views. If the oldest selected clip is over 120 seconds old, rates halve; beyond 180 seconds they quarter. This is explicit, visible load shedding: **brief vehicles can be missed**. The 2–5 minute target is not a guarantee, and a sustained in-car latency/recall trial is still required.
 
