@@ -6,7 +6,7 @@ The dashboard is named **Amber Local**. This project's repository is [gbplaunt22
 
 ## Using the deployed Pi
 
-The latest front-camera configuration and dashboard health/sound fixes were deployed at 15:59 Central after the SSH connection recovered. Ingestion, video, and web services were active, and 19 focused tests passed on the Pi. See `VERIFICATION.md` for the positive controlled result and the remaining sound/latency checks.
+The latest front-camera configuration and dashboard health/sound fixes were deployed at 15:59 Central after the SSH connection recovered. Ingestion, video, and web services were active, and 19 focused tests passed on the Pi. A later database inspection confirmed a normal-worker positive match with an approximately seven-minute delay, exceeding the five-minute target. See `VERIFICATION.md` for the measured results and remaining sound/latency checks.
 
 1. Join **AMBER-Local** on your phone. For the existing installation, generated Wi-Fi and dashboard credentials were delivered separately in a private `CONNECT.md`. Credentials and this private guide are excluded from Git; installation also stores recovery credentials under `/mutable/amber` on the Pi.
 2. Open **http://192.168.66.1:8088/** and sign in. The access point intentionally provides no internet gateway or DNS service; your phone may ask to stay connected to a network without internet.
@@ -112,7 +112,7 @@ Alert activation includes `vehicles`, optional `reference`, `source`, `draft_id`
 
 Read `VERIFICATION.md` and the JSON benchmark files for measured outcomes and limits. The synthetic parser regression corpus is in `tests/parser_cases.json`, and the separate final holdout is in `tests/parser_holdout.json`. `deploy/evaluate_parser.py` exercises the actual parser service without activating alerts; use `--cases` to select a corpus. These small test sets do not establish production accuracy.
 
-The first controlled live trial produced a stored strong possible-match event on the Pi from two distinct frames in actual Tesla front-camera footage. That diagnostic manually prioritized the recording after a startup backlog; it does not establish automatic five-minute latency. Audible phone notification remains unverified. Private plates, footage, and event records are excluded from this repository.
+The first controlled live trial produced a stored strong possible-match event on the Pi from two distinct frames in actual Tesla front-camera footage. That diagnostic manually prioritized the recording after a startup backlog. A subsequent pass produced a separate strong match through the normal worker without manual clip selection, with an observed delay of approximately 6 minutes 56 seconds. The five-minute target was not met on that pass; one sample does not establish a representative 95th percentile. This automatic event occurred before front-only deployment, so its timing does not measure that configuration. Audible phone notification remains unverified. Private plates, footage, and event records are excluded from this repository.
 
 To stop processing immediately without affecting TeslaUSB:
 

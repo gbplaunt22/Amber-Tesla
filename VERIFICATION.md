@@ -1,6 +1,12 @@
 # Deployment verification — 30 October 2026
 
-Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, Debian 12 AArch64. The first supervised in-car trial has begun and produced a positive operator-prioritized diagnostic; the full driving acceptance criteria are **not yet established**.
+Implemented and deployed on the existing 4 GB Raspberry Pi 4 running TeslaUSB, Debian 12 AArch64. The first supervised in-car trial produced an operator-prioritized positive diagnostic and a later automatic positive match; the full driving acceptance criteria are **not yet established**.
+
+## Automatic follow-up pass: approximately seven-minute delay
+
+A read-only Pi database inspection at approximately 16:00 Central confirmed a second strong possible-match event from a different front-camera clip captured at approximately 15:51:12. The normal worker created its initial exact-read candidate at approximately 15:57:54 and recorded the second distinct exact read at approximately 15:58:08. The recorded match-delay metric was **415.537 seconds**, approximately **6 minutes 56 seconds**, with minimum OCR confidences 0.9939423203468323 and 0.9993002414703369 for the two qualifying frames.
+
+The operator-selected diagnostic had finished and normal processing had resumed before this clip arrived; this second clip was not manually selected. This establishes one automatic positive pass, but the **five-minute target was not met**. One sample cannot establish a representative 95th-percentile delay or recall. The event preceded the 15:59 front-only deployment, so it is not a performance measurement of the front-only configuration. Phone sound remains unverified; private plate text, imagery, and event records are excluded.
 
 ## Subsequent live result and front-camera configuration
 
@@ -10,7 +16,7 @@ At the user's request, the latest source defaults to **front camera only** throu
 
 The latest dashboard source reports the age of the oldest actual pending footage, including sightings after clip discovery. Empty-state text distinguishes an active alert from having no active search, and operator-prioritized diagnostic results are labeled. Sound handling also allows a weak candidate's later strong upgrade and a user-unlocked audio context. **Seven API tests passed on the Pi in 8.31 seconds**; JavaScript syntax and focused state-transition checks passed locally. These software checks do not establish audible playback on a physical phone.
 
-**Final update at 15:59 Central:** the SSH connection recovered. All **19 focused Pi tests passed in 31.21 seconds**: six admission-window/camera tests, six video/ingestion tests, and seven API tests. The surrounding helper subsequently reached its 40-second deadline after pytest had printed the complete passing summary. The separate deployment command exited successfully, installing the front-only configuration, ingestion filter, API, and dashboard JavaScript; ingestion, video, and web services were confirmed active. Nineteen queued non-front clips were removed from processing. The user confirmed that the strong possible-match card was visible on the dashboard. These are focused regression and deployment checks, not a rerun of the entire historical suite, a confirmed phone beep, or an autonomous latency trial.
+**Final update at 15:59 Central:** the SSH connection recovered. All **19 focused Pi tests passed in 31.21 seconds**: six admission-window/camera tests, six video/ingestion tests, and seven API tests. The surrounding helper subsequently reached its 40-second deadline after pytest had printed the complete passing summary. The separate deployment command exited successfully, installing the front-only configuration, ingestion filter, API, and dashboard JavaScript; ingestion, video, and web services were confirmed active. Nineteen queued non-front clips were removed from processing. The user confirmed that the strong possible-match card was visible on the dashboard. These are focused regression and deployment checks, not a rerun of the entire historical suite, a confirmed phone beep, or a representative autonomous latency trial.
 
 ## Live trial update, 30 October 2026 at 15:42 Central
 
